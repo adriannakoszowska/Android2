@@ -17,6 +17,7 @@ public class PaintView extends SurfaceView implements SurfaceHolder.Callback {
 
     ArrayList<RectF> punkty;
     Paint paint = new Paint();
+    private int color;
 
     public PaintView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -59,6 +60,10 @@ public class PaintView extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawOval(punkt, paint);
         }
 
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
 }
