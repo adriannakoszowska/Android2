@@ -26,8 +26,9 @@ public class PaintView extends SurfaceView implements SurfaceHolder.Callback {
 
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        punkty = new ArrayList<RectF>();
+        punkty = new ArrayList<ObiektDoNarysowania>();
         paint = new Paint();
+        color = Color.RED;
     }
 
     public PaintView(Context context) {
@@ -47,8 +48,8 @@ public class PaintView extends SurfaceView implements SurfaceHolder.Callback {
         // TODO Auto-generated method stub
     }
     public boolean onTouchEvent(MotionEvent event) {
-        RectF oval = new RectF(event.getX()-50, event.getY()-50, event.getX() + 50, event.getY() + 50);
-        punkty.add(oval);
+        RectF oval = new RectF(event.getX() - 50, event.getY() - 50, event.getX() + 50, event.getY() + 50);
+        punkty.add(new ObiektDoNarysowania(color, oval));
         invalidate();
         return true;
     }
