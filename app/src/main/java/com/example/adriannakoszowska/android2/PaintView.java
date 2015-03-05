@@ -2,6 +2,8 @@ package com.example.adriannakoszowska.android2;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 public class PaintView extends SurfaceView implements SurfaceHolder.Callback {
 
     ArrayList<RectF> punkty;
+    Paint paint = new Paint();
 
     public PaintView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -22,7 +25,8 @@ public class PaintView extends SurfaceView implements SurfaceHolder.Callback {
 
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // TODO Auto-generated constructor stub
+        punkty = new ArrayList<RectF>();
+        paint = new Paint();
     }
 
     public PaintView(Context context) {
@@ -45,11 +49,16 @@ public class PaintView extends SurfaceView implements SurfaceHolder.Callback {
         RectF oval = new RectF(event.getX()-50, event.getY()-50, event.getX() + 50, event.getY() + 50);
         punkty.add(oval);
         invalidate();
-
         return true;
     }
 
     protected void onDraw(Canvas canvas) {
+        paint.setColor(Color.RED);
+
+        for (RectF punkt : punkty) {
+            canvas.drawOval(punkt, paint);
+        }
+
     }
 
 }
