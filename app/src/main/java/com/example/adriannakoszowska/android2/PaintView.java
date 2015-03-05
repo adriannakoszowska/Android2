@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class PaintView extends SurfaceView implements SurfaceHolder.Callback {
 
-    ArrayList<RectF> punkty;
+    ArrayList<ObiektDoNarysowania> punkty;
     Paint paint = new Paint();
     private int color;
 
@@ -54,14 +54,11 @@ public class PaintView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     protected void onDraw(Canvas canvas) {
-        paint.setColor(Color.RED);
-
-        for (RectF punkt : punkty) {
-            canvas.drawOval(punkt, paint);
+        for (ObiektDoNarysowania punkt : punkty) {
+            paint.setColor(punkt.kolor);
+            canvas.drawOval(punkt.figura, paint);
         }
-
     }
-
     public void setColor(int color) {
         this.color = color;
     }
