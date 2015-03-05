@@ -6,9 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -17,21 +20,24 @@ public class MainActivity extends Activity {
     Context ctx;
     RadioGroup radioGroup;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paint_main);
-        paintView = (PaintView) findViewById(R.id.view);
+        paintView = (PaintView) findViewById(R.id.paintView);
         ctx = getApplicationContext();
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
+            switch (item.getItemId()) {
             case R.id.menu_kolor:
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -58,6 +64,40 @@ public class MainActivity extends Activity {
                 alertDialog.show();
 
                 break;
+
+            case R.id.menu_rozmiar:
+
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View layout = inflater.inflate(R.layout.rozmiar, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                        .setView(layout);
+                builder.setTitle("Wybor rozmiaru");
+                alertDialog = builder.create();
+                alertDialog.show();
+                SeekBar sb = (SeekBar)layout.findViewById(R.id.seekBar);
+                sb.setMax(30);
+                sb.setProgress(paintView.getRozmiar()-20);
+                sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar arg0) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar arg0) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        paintView.setRozmiar(20+progress);
+
+                    }
+                });
 
         }
 
